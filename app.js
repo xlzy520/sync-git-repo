@@ -26,25 +26,24 @@ app.post('/webhook', (req, res) => {
       if (code === 0) {
         console.log('Delete successful');
         // 执行 git clone 命令
-        const cloneProcess = spawn('git', [
-          'clone',
-          repoURL,
-          `../${repoName}`,
-        ]);
-        
-        cloneProcess.on('close', (code) => {
-          if (code === 0) {
-            console.log('Clone successful');
-            // 执行其他操作，例如重启服务器、更新数据库等
-          } else {
-            console.error(`Clone failed with code ${code}`);
-          }
-          res.sendStatus(200);
-        });
       } else {
         console.error(`Delete failed with code ${code}`);
-        res.sendStatus(500);
       }
+      const cloneProcess = spawn('git', [
+        'clone',
+        repoURL,
+        `../${repoName}`,
+      ]);
+      
+      cloneProcess.on('close', (code) => {
+        if (code === 0) {
+          console.log('Clone successful');
+          // 执行其他操作，例如重启服务器、更新数据库等
+        } else {
+          console.error(`Clone failed with code ${code}`);
+        }
+        res.sendStatus(200);
+      });
     })
   }
 });
