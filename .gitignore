@@ -1,0 +1,7 @@
+.vercel
+.idea
+node_modules
+pnpm_lock.yaml
+
+# Project exclude paths
+/dist/

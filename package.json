@@ -1,0 +1,24 @@
+{
+  "name": "zhibi-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "部署了一堆服务",
+  "scripts": {
+    "start": "cross-env mode=dev ./node_modules/.bin/nodemon ./bin/www",
+    "build": "webpack --progress",
+    "analyzer": "cross-env use_analyzer=true npm run build"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.17",
+    "dayjs": "^1.11.7",
+    "express": "~4.16.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.7",
+    "prettier": "2.3.2",
+    "webpack": "^5.76.2",
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
