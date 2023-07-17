@@ -1,2 +1,2 @@
 # sync-git-repo
-一个Express服务，用于部署我的一些后端脚本和接口
+同步最新的GitHub Repo文件到服务器
