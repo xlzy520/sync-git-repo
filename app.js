@@ -19,25 +19,33 @@ app.post('/webhook', (req, res) => {
     console.log(repository, '===========打印的 ------ ');
     const repoName = repository.name;
     const repoURL = repository.clone_url;
-
-    // 执行 git clone 命令
-    const cloneProcess = spawn('git', [
-      'clone',
-      repoURL,
-      `./${repoName}`,
-    ]);
-
-    cloneProcess.on('close', (code) => {
+    // 需要先删除本地仓库，否则 clone 会失败
+    const rmProcess = spawn('rm', ['-rf', `./${repoName}`]);
+    rmProcess.on('close', (code) => {
       if (code === 0) {
-        console.log('Clone successful');
-        // 执行其他操作，例如重启服务器、更新数据库等
+        console.log('Delete successful');
+        // 执行 git clone 命令
+        const cloneProcess = spawn('git', [
+          'clone',
+          repoURL,
+          `./${repoName}`,
+        ]);
+        
+        cloneProcess.on('close', (code) => {
+          if (code === 0) {
+            console.log('Clone successful');
+            // 执行其他操作，例如重启服务器、更新数据库等
+          } else {
+            console.error(`Clone failed with code ${code}`);
+          }
+          res.sendStatus(200);
+        });
       } else {
-        console.error(`Clone failed with code ${code}`);
+        console.error(`Delete failed with code ${code}`);
+        res.sendStatus(500);
       }
-    });
+    })
   }
-
-  res.sendStatus(200);
 });
 
 app.get('/webhook_test', (req, res) => {
