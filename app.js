@@ -127,6 +127,10 @@ app.get('/test', (req, res) => {
   res.send('test');
 })
 
+app.get('/Product/Index/47946', (req, res) => {
+  res.redirect('https://haokawx.lot-ml.com/Product/Index/47946');
+});
+
 
 app.use((err, req, res, next) => {
   console.error('Error:', err);
