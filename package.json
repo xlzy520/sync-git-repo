@@ -1,8 +1,8 @@
 {
-  "name": "zhibi-server",
+  "name": "sync-git-repo",
   "version": "1.0.0",
   "private": true,
-  "description": "部署了一堆服务",
+  "description": "实现一个webhook，同步git仓库的文件到服务器，对Web页面进行更新",
   "scripts": {
     "start": "cross-env mode=dev ./node_modules/.bin/nodemon ./bin/www",
     "build": "webpack --progress",
